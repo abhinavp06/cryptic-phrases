@@ -1,4 +1,4 @@
-I take interviews every now and then as part of my job.
+﻿I take interviews every now and then as part of my job.
 
 Recently, while I was conducting interviews, I thought of this problem:
 	* Imagine there is a string: "abcdyhjkhxxxyxxxxxyxxxxxxxxyxxxxxxxxxyxxxxxxxxb"

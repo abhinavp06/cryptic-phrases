@@ -73,7 +73,7 @@ struct Result {
     int n;
 };
 
-Result find_pattern(char x, char y, const std::string& input_string) {
+Result find_pattern_naive(char x, char y, const std::string& input_string) {
     Result result = { {}, -1 };
     int max_n = -1;
 
@@ -144,7 +144,7 @@ int main() {
 
     std::cout << "\n" << std::endl;
 
-    Result result = find_pattern(x, y, input_string);
+    Result result = find_pattern_naive(x, y, input_string);
     
     std::cout << "--- OUTPUT ---" << std::endl;
     std::cout << "n = " << result.n << std::endl;

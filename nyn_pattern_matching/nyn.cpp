@@ -49,11 +49,11 @@
  *
  *   Case 7 — x and y are the same character (invalid input):
  *     x="a", y="a", input="aaabaaaa"
- *     output: [], -1
+ *     output: "invalid input"
  *
  *   Case 8 — input string too short (invalid input):
  *     x="a", y="b", input="ab"
- *     output: [], -1
+ *     output: "invalid input"
  *
  * FUTURE ENHANCEMENTS:
  *   - report all valid patterns irrespective of length, not just the longest
@@ -92,17 +92,16 @@ Result find_pattern(char x, char y, const std::string& input_string) {
             r++;
         }
 
-        if (l >= 0 && r < input_string.size()) {
+        if (l != i-1 && r != i+1) {
             current_n = std::min(i - l, r - i) - 1;
-        }
-        
-        if (current_n == max_n) {
-            result.indexes.push_back(l + 1);
-        }
-        else if(current_n > max_n) {
-            result.indexes.clear();
-            result.indexes.push_back(l + 1);
-            max_n = current_n;
+            if (current_n == max_n) {
+                result.indexes.push_back(l + 1);
+            }
+            else if (current_n > max_n) {
+                result.indexes.clear();
+                result.indexes.push_back(l + 1);
+                max_n = current_n;
+            }
         }
     }
 

@@ -7,3 +7,7 @@ Recently, while I was conducting interviews, I thought of this problem:
 - For example, in the string above, the biggest value of n would have been 9 if there wasn't a "b" in the end
 
 This can lead to a lot of things - DNA, audio analysis, cryptography, etc.
+
+TODO: 
+1. Generalize "x" from single char to k-mer std::string
+2. Add DNA sequence generator 

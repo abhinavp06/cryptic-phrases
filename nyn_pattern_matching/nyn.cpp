@@ -66,12 +66,71 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include <math.h>
 
 struct Result {
     std::vector<int> indexes;
     int n;
 };
+
+struct Run {
+    char character;
+    int count;
+    int start_index;
+};
+
+Result find_pattern_run_length_encoding(char x, char y, const std::string& input_string) {
+    Result result = { {}, -1 };
+    std::string rle_string;
+    std::vector<Run> rle_runs;
+
+    for (int i = 0; i < input_string.size(); i++) {
+        Run run = {
+            input_string[i],
+            1,
+            i
+        };
+        rle_string.push_back(input_string[i]);
+
+        while (i < input_string.size() - 1 && input_string[i] == input_string[i + 1]) {
+            run.count++;
+            i++;
+        }
+
+        rle_runs.push_back(run);
+        rle_string.append(std::to_string(run.count));
+    }
+
+    std::cout << "RLE ENCODED STRING: " << rle_string << std::endl;
+
+    if (rle_runs.size() < 3) {
+        return result;
+    }
+
+    for (int i = 0; i < rle_runs.size() - 2; i ++) {
+        /**
+        * 1. middle character must be the pivot and it's count should be 1
+        * 2. characters beside the middle character must be the same
+        * 3. find std::min() between the counts of both the side characters and if it is greater than or equal to max n, update the result object
+        */
+        if (rle_runs[i + 1].character == y && rle_runs[i + 1].count == 1 && rle_runs[i].character == x && rle_runs[i].character == rle_runs[i + 2].character) {
+            int current_n = std::min(rle_runs[i].count, rle_runs[i + 2].count);
+            int start_index = rle_runs[i].count == current_n ? rle_runs[i].start_index : rle_runs[i+1].start_index - current_n;
+            if (current_n < result.n) {
+                continue;
+            } 
+            else if (current_n == result.n) {
+                result.indexes.push_back(start_index);
+            }
+            else if (current_n > result.n) {
+                result.indexes.clear();
+                result.indexes.push_back(start_index);
+                result.n = current_n;
+            }
+        }
+    }
+
+    return result;
+}
 
 Result find_pattern_naive(char x, char y, const std::string& input_string) {
     Result result = { {}, -1 };
@@ -144,9 +203,11 @@ int main() {
 
     std::cout << "\n" << std::endl;
 
-    Result result = find_pattern_naive(x, y, input_string);
+    Result result = find_pattern_run_length_encoding(x, y, input_string);
+
+    //Result result = find_pattern_naive(x, y, input_string);
     
-    std::cout << "--- OUTPUT ---" << std::endl;
+    std::cout << "\n--- OUTPUT ---" << std::endl;
     std::cout << "n = " << result.n << std::endl;
     std::cout << "indexes =>" << " ";
     for (int index : result.indexes) {

@@ -1,2 +1,1 @@
-# cryptic-phrases
-Experimenting with cryptography
+Playing around

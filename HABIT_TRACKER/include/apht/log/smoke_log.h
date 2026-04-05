@@ -2,7 +2,7 @@
 #include <chrono>
 #include <string>
 #include <vector>
-#include "apht/cig_log.h"
+#include "apht/log/cig_log.h"
 
 class SmokingTracker {
 public:

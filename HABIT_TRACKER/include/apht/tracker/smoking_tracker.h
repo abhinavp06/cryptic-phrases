@@ -1,8 +1,9 @@
 #pragma once
 #include <chrono>
 #include <string>
+#include <unordered_map>
 #include <vector>
-#include "apht/log/cig_log.h"
+#include "apht/log/cigarette_log.h"
 
 class SmokingTracker {
 public:
@@ -10,5 +11,5 @@ public:
     void deleteLog(const std::string& id);
     std::vector<CigaretteLog> getLogs(std::chrono::system_clock::time_point start_time, std::chrono::system_clock::time_point end_time);
 private:
-    std::vector<CigaretteLog> cig_logs;
+    std::unordered_map<std::string, CigaretteLog> cig_logs;
 };
